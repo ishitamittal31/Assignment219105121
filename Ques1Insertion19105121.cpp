@@ -47,13 +47,24 @@ void print(Node* head){
 }
 
 Node* insertNodeInPosition(Node* head, int i, int data){// solution to insert the node
-    Node* newNode = new Node(data); // make new node using the data entered by the user
-    if(i==0){
-        newNode->next = head; //if i is 0 then it is the first node so update the head and return
-        return newNode;
+
+    Node* newNode = new Node(data); 
+    if(head==NULL){
+        if(i==0){
+            Node* nn = new Node(data);
+            return nn;
+        }
+        return head;
     }
-    if(!head){return head;}//corner case for head being null
+    if(i==0){
+        newNode->next = head; 
+        head = newNode;
+        return head;
+    }
+    
    head->next = insertNodeInPosition(head->next, i-1, data); // call the function
+   return head;
+
 }
 
 int main(){
